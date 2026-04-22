@@ -2,11 +2,13 @@
 
 const pkg = require('./package.json');
 const { resolveRuntimeConfig } = require('./lib/runtimeConfig');
-const { generateImage, editImage } = require('./lib/api');
+const { generateImage, editImage, reviewImages, checkConsistency } = require('./lib/api');
 
 const CLI_COMMANDS = [
   { name: 'generate', description: '调用 gpt-image-2 生成图片' },
   { name: 'edit', description: '以参考图（可选 mask）调用 gpt-image-2 编辑接口生成新图' },
+  { name: 'review', description: '按 7 维 rubric 对一张或多张图做结构化评审（多模态模型）' },
+  { name: 'consistency', description: '在一组图上做一致性检查，报告锁定变量的偏差与修正建议' },
 ];
 
 function makeLogger(logger) {
@@ -112,6 +114,92 @@ const TOOL_DEFINITIONS = [
     optional: true,
     async execute(runtime, params) {
       return editImage(runtime.config, params);
+    },
+  },
+  {
+    name: 'gpt_image_review',
+    label: 'GPT Image Designer: 7-Dimension Review',
+    description: '用多模态模型按 7 维 rubric 评审一张或多张图，输出结构化 JSON（overall_score / dimension_scores / p0_issues / improvement_suggestions）。',
+    parameters: {
+      type: 'object',
+      properties: {
+        images: {
+          type: 'array',
+          items: { type: 'string' },
+          description: '本地图片路径数组（1-10 张）',
+        },
+        imagesJson: {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: {
+              file_id: { type: 'string' },
+              image_url: { type: 'string' },
+            },
+          },
+          description: 'JSON 方式：file_id 或 image_url(URL/data URL)',
+        },
+        brief: { type: 'string', description: '结构化 brief 文本（建议附；评审会结合 brief 判断）' },
+        rubric: { type: 'string', description: '可选，覆盖默认 7 维 rubric 文本' },
+        model: { type: 'string', description: '评审用多模态模型，默认 gpt-4o' },
+        temperature: { type: 'number' },
+        maxTokens: { type: 'number' },
+        outputDir: { type: 'string' },
+        sessionName: { type: 'string' },
+        baseUrl: { type: 'string' },
+        apiKey: { type: 'string' },
+      },
+    },
+    optional: true,
+    async execute(runtime, params) {
+      return reviewImages(runtime.config, params);
+    },
+  },
+  {
+    name: 'gpt_image_consistency',
+    label: 'GPT Image Designer: Series Consistency',
+    description: '对一组图做一致性检查；输入锁定变量（palette/lighting/framing/texture/character/typography/aspect_ratio/brand_cues），输出差异报告、离群图与修正建议。',
+    parameters: {
+      type: 'object',
+      properties: {
+        images: {
+          type: 'array',
+          items: { type: 'string' },
+          description: '本地图片路径数组（2-8 张）',
+        },
+        imagesJson: {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: {
+              file_id: { type: 'string' },
+              image_url: { type: 'string' },
+            },
+          },
+          description: 'JSON 方式：file_id 或 image_url',
+        },
+        lockedVariables: {
+          type: 'array',
+          items: {
+            type: 'string',
+            enum: ['palette', 'lighting', 'framing', 'texture', 'character', 'typography', 'aspect_ratio', 'brand_cues'],
+          },
+          description: '必须保持一致的维度清单',
+        },
+        permittedVariance: { type: 'string', description: '允许变化的维度的文本描述' },
+        brief: { type: 'string', description: '可选 brief，帮助更准确的判定' },
+        model: { type: 'string', description: '多模态模型，默认 gpt-4o' },
+        temperature: { type: 'number' },
+        maxTokens: { type: 'number' },
+        outputDir: { type: 'string' },
+        sessionName: { type: 'string' },
+        baseUrl: { type: 'string' },
+        apiKey: { type: 'string' },
+      },
+    },
+    optional: true,
+    async execute(runtime, params) {
+      return checkConsistency(runtime.config, params);
     },
   },
 ];

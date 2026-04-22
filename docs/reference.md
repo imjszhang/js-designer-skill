@@ -1,124 +1,83 @@
-# Design Reference
+# Design Reference (Index + Core Aphorisms)
 
-## Purpose
-Use this file when the request needs more than a quick prompt. It provides the minimum design framework needed to:
+This file is the entry index of the knowledge base.
+Long tables used to live here. They now live as standalone cards under `docs/knowledge/`, `docs/rubric/`, `docs/prompt/`, `docs/workflows/`.
+Agents should load a specific card on demand rather than reading everything here.
 
-- define the real problem
-- understand the audience
-- map intent into visual decisions
-- review images systematically
-- keep a series visually consistent
+## When To Load What
 
-## 1. Problem Definition
-Before writing prompts, define the job in business terms:
+| You are doing | Load this |
+|---|---|
+| translating a mood into concrete visual parameters | [knowledge/emotion-visual-map.md](knowledge/emotion-visual-map.md) |
+| checking colors/symbols against a target culture | [knowledge/culture-codes.md](knowledge/culture-codes.md) |
+| converting a brand personality into a visual direction | [knowledge/brand-archetypes.md](knowledge/brand-archetypes.md) |
+| picking a composition system or a reading path | [knowledge/composition-systems.md](knowledge/composition-systems.md) |
+| scoring a generated image or giving structured critique | [rubric/aesthetic-7dim.md](rubric/aesthetic-7dim.md) |
+| assembling a final prompt | [prompt/8-layer-template.md](prompt/8-layer-template.md) |
+| running a real task end to end | [workflows/](workflows/) |
+| picking a ready-made example | [examples.md](examples.md) |
+| bind scripts to CLI / tools | [script-contract.md](script-contract.md) |
+
+## Core Aphorisms (the five that never change)
+
+1. Define the problem before writing the prompt.
+2. Commit to one strong direction first, then branch into weak alternatives.
+3. Text baked into an image is a high-risk item. Review it separately.
+4. For information design, correctness and legibility come before decoration.
+5. For a series, lock the constant variables first, then allow local variance.
+
+## The Five Questions (Problem Definer)
+
+Before any prompt, answer these:
 
 - `goal`: what should this image cause the viewer to do or feel?
-- `audience`: who is it for?
-- `context`: where will it be seen?
-- `success`: what would make this image successful?
-- `constraints`: what cannot be changed?
+- `audience`: who is it for? what is their viewing context?
+- `must_include`: any required text, logo, product, or element?
+- `must_avoid`: any forbidden symbol, style, or tone?
+- `success`: what outcome proves this image worked?
 
-Useful reframing prompt:
+Reframe as How-Might-We:
 
-> How might this image help the target viewer notice, understand, and act within the real viewing context?
+> How might this image help [audience] in [context] perform [action] / feel [emotion]?
 
-## 2. Audience And Viewing Context
-The same image direction can fail when the viewing context changes. Check:
+## The Seven Dimensions (Critic)
 
-- screen or print
-- portrait, square, or landscape
-- fast scroll or focused reading
-- cold traffic or existing followers
-- local or cross-cultural audience
+Score 1 to 5 on each; check full scoring bands in [rubric/aesthetic-7dim.md](rubric/aesthetic-7dim.md).
 
-### Attention Triggers
-- strong scale contrast
-- one dominant focal point
-- clear text hierarchy
-- controlled color contrast
-- simple background when text matters
+| Dimension | Weight |
+|---|---|
+| Visual hierarchy | 20% |
+| Composition & balance | 15% |
+| Color harmony | 15% |
+| Typography & text rendering | 15% |
+| Emotional fit | 15% |
+| Originality | 10% |
+| Functionality (platform fit) | 10% |
 
-### Attention Killers
-- too many focal points
-- decorative clutter
-- small dense text
-- contradictory moods
-- generic AI-perfect surfaces with no material logic
+Any P0 issue (wrong text, cultural offense, collapsed hierarchy) blocks delivery regardless of the weighted score.
 
-## 3. Visual Translation Rules
-Translate abstract requests into concrete choices.
+## The Eight Layers (Prompt Director)
 
-### Mood To Visual Mapping
-| Mood | Color | Composition | Material/Texture | Lighting |
-|---|---|---|---|---|
-| trust | blue, deep green, neutral tones | stable, balanced, clean spacing | matte, natural, real surfaces | soft directional light |
-| calm | low saturation, soft neutrals | open space, slow rhythm, wide breathing room | linen, paper, mist, soft grain | diffused light |
-| warmth | amber, cream, warm earth | closer framing, gentle overlap | wood, fabric, ceramic | warm side light |
-| urgency | red, orange, high contrast | compressed spacing, directional movement | sharp edges, high contrast | strong contrast light |
-| luxury | restrained palette, dark neutrals, metallic accents | minimal but deliberate placement | stone, metal, glass, velvet | sculpted dramatic light |
-| playful | bright accents, higher contrast | asymmetry, bounce, motion | paper cutout, stickers, hand-made feel | bright even light |
+A final prompt should include eight layers. See [prompt/8-layer-template.md](prompt/8-layer-template.md) for good/bad examples and iteration priority.
 
-### Style To Prompt Translation
-- `premium` -> restrained palette, large negative space, precise alignment, material realism
-- `editorial` -> strong hierarchy, purposeful cropping, typographic confidence, photographic framing
-- `cinematic` -> controlled lighting, lens choice, atmospheric depth, narrative gesture
-- `xiaohongshu-friendly` -> vertical framing, immediate focal point, tactile realism, lifestyle tone, not hard-sell
-- `new chinese` -> leave room, natural materials, cultural restraint, avoid costume-drama cliches
+1. Subject
+2. Scene & context
+3. Camera (angle / lens / DOF)
+4. Lighting (direction / quality / temperature)
+5. Color mood
+6. Style reference & texture
+7. Text content (if any) and layout
+8. Technical spec (aspect ratio / quality / background)
 
-## 4. Image Types
-### Poster / Cover
-1. focal point
-2. headline readability
-3. platform-fit crop
-4. one emotional hook
+## The Three Quality Gates
 
-### Brand Visual
-1. visual system consistency
-2. recognizable brand cues
-3. reusable composition logic
-4. room for copy variations
+Stop the workflow at:
 
-### Infographic
-1. correctness
-2. hierarchy
-3. reading sequence
-4. text legibility
+- **Gate A** after problem definition — confirm the brief with the user.
+- **Gate B** after visual direction — confirm palette/style/composition with the user.
+- **Gate C** after first batch — run `gpt_image_review`; iterate on the prompt layer rather than regenerating blindly.
 
-### Social Graphic
-1. scroll-stop value
-2. one-message clarity
-3. mobile readability
-4. style consistency with surrounding assets
-
-## 5. Review Rubric
-Review these dimensions:
-
-- hierarchy
-- composition
-- color
-- typography and text rendering
-- emotional fit
-- originality
-- platform fit
-
-## 6. Iteration Strategy
-If the direction is right but weak, adjust:
-
-- contrast
-- focal point clarity
-- text space
-- material cues
-- lighting cues
-
-If the direction is wrong, go back to:
-
-- audience
-- emotional target
-- visual references
-- composition logic
-
-## 7. Series Consistency Rules
-Lock these variables first:
+## Series Consistency (lock these first)
 
 - palette family
 - lighting family
@@ -126,3 +85,5 @@ Lock these variables first:
 - surface texture level
 - typography direction
 - brand cues
+
+Use `gpt_image_consistency` to verify. If a single image drifts, fix it in place; do not re-roll the whole series.

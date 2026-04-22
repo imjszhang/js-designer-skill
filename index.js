@@ -12,6 +12,14 @@ const COMMANDS = {
     module: './scripts/gpt-image-edit',
     description: '调用 gpt-image 编辑接口，以一张或多张参考图生成新图（可选 mask 局部编辑）',
   },
+  review: {
+    module: './scripts/gpt-image-review',
+    description: '按 7 维 rubric 对一张或多张图做结构化评审',
+  },
+  consistency: {
+    module: './scripts/gpt-image-consistency',
+    description: '对一组图做一致性检查，报告锁定变量的偏差与修正建议',
+  },
 };
 
 function printUsage() {
