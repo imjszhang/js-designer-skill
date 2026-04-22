@@ -1,5 +1,5 @@
 {
-  "name": "js-gpt-image-designer-skill",
+  "name": "js-designer-skill",
   "version": "1.0.0",
   "description": "面向图像生成与视觉策略的设计师 skill，提供需求澄清、视觉方向制定、prompt 组装与 gpt-image-2 生成能力",
   "private": true,

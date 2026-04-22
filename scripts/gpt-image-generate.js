@@ -32,7 +32,7 @@ function parseGenerateArgs(argv) {
 }
 
 function printUsage() {
-  console.log('\njs-gpt-image-designer-skill - gpt-image 生成命令');
+  console.log('\njs-designer-skill - gpt-image 生成命令');
   console.log('='.repeat(60));
   console.log('\n使用方法:');
   console.log('  node cli/index.js generate --prompt "描述" [options]\n');

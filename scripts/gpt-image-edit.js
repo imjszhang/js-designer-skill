@@ -44,7 +44,7 @@ function parseEditArgs(argv) {
 }
 
 function printUsage() {
-  console.log('\njs-gpt-image-designer-skill - gpt-image 编辑命令（以参考图生成）');
+  console.log('\njs-designer-skill - gpt-image 编辑命令（以参考图生成）');
   console.log('='.repeat(60));
   console.log('\n使用方法:');
   console.log('  node cli/index.js edit --prompt "描述" --image path/to/ref.png [options]\n');

@@ -15,7 +15,7 @@ const COMMANDS = {
 };
 
 function printUsage() {
-  console.log('\njs-gpt-image-designer-skill - 设计师图像技能');
+  console.log('\njs-designer-skill - 设计师图像技能');
   console.log('='.repeat(50));
   console.log('\n使用方法:');
   console.log('  node index.js <command> [args...] [options]\n');

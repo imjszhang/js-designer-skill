@@ -1,5 +1,5 @@
 ---
-name: js-gpt-image-designer-skill
+name: js-designer-skill
 description: 面向图像生成与视觉策略的设计师 skill，提供需求澄清、视觉方向制定、prompt 组装、结果评审与 gpt-image-2 执行能力。适用于海报、封面、品牌视觉、社媒图、信息图、图片评审、系列图统一风格等场景。
 version: 1.0.0
 metadata:
@@ -10,7 +10,7 @@ metadata:
         - node
 ---
 
-# js-gpt-image-designer-skill
+# js-designer-skill
 
 面向图像生成任务的设计师技能。它不只是“帮你出 prompt”，而是把图像工作拆成需求澄清、视觉策略、prompt 组装、执行和评审几个阶段。
 
@@ -77,7 +77,7 @@ const result = await adapter.tools[0].execute('demo-call', {
 ## 目录结构
 
 ```text
-js-gpt-image-designer-skill/
+js-designer-skill/
 ├── SKILL.md
 ├── package.json
 ├── skill.contract.js

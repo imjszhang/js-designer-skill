@@ -7,7 +7,7 @@
  * 环境变量: OPENAI_API_KEY、OPENAI_API_BASE（与 doubao 中 DOUBAO_API_KEY 类似；BASE 为 API 根，可省略用默认 https://api.openai.com/v1）
  *
  * 使用方法:
- * node skills/js-gpt-image-designer-skill/index.js generate [选项]
+ * node skills/js-designer-skill/index.js generate [选项]
  *
  * 主要选项:
  * --prompt <text>      图片生成提示词 (必需)

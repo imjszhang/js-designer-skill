@@ -6,7 +6,7 @@ const contract = require('../skill.contract');
 
 function printUsage(stdout = process.stdout) {
   const lines = [
-    'js-gpt-image-designer-skill - 设计师图像工具',
+    'js-designer-skill - 设计师图像工具',
     '',
     '使用方法:',
     '  node cli/index.js <command> [args...] [options]',
