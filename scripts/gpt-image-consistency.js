@@ -57,14 +57,16 @@ function printUsage() {
   console.log('                              typography, aspect_ratio, brand_cues');
   console.log('  --permitted "…"             允许变化的维度描述（可选）');
   console.log('  --brief "…" / --brief-file  原始 brief（可选，提升准确度）');
+  console.log('  --config-file <path>        从 JSON 读取参数；显式参数优先级高于配置文件');
   console.log('\n其他:');
-  console.log('  --model <name>              默认 gpt-4o');
+  console.log('  --model <name>              默认取 GPT_IMAGE_CONSISTENCY_MODEL，最终回退 gpt-4o');
   console.log('  --output-dir <dir>          结果保存根目录');
   console.log('  --session-name <name>       会话目录名');
   console.log('  --temperature <n>           默认 0.2');
   console.log('  --max-tokens <n>            默认 2500');
   console.log('  --base-url <url>            自定义 API 根');
   console.log('  --api-key <key>             覆盖 OPENAI_API_KEY');
+  console.log('  功能开关:                   GPT_IMAGE_CONSISTENCY_ENABLED=false 时将拒绝执行');
 }
 
 async function main() {

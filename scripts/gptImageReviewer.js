@@ -2,14 +2,15 @@
 
 /**
  * 视觉评审工具：读取一张或多张已生成图，结合 brief + 7 维评审 rubric，
- * 通过多模态模型（默认 gpt-4o）的 Chat Completions 接口输出结构化评审 JSON。
+ * 通过多模态模型的 Chat Completions 接口输出结构化评审 JSON。
+ * 默认模型优先取 runtime/config/env，最后才回退到 gpt-4o。
  *
  * 主要字段：
  *   images          本地图片路径数组（至少 1 张，建议 ≤ 4）
  *   imagesJson      等价的 [{image_url}] / [{file_id}] 形式（二选一）
  *   brief           结构化 brief 文本；也可传对象会被 JSON.stringify
  *   rubric          可选，覆盖默认 rubric 文本
- *   model           评审模型，默认 gpt-4o
+ *   model           评审模型；未传时最终回退到 gpt-4o
  *   outputDir       结果保存根目录
  *   sessionName     会话目录名
  *   baseUrl/apiKey  同 generator

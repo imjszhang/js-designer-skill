@@ -101,6 +101,9 @@ const contract = require('./skill.contract');
 
 const adapter = contract.createOpenClawAdapter({
   defaultQuality: 'high',
+  defaultReviewModel: 'gpt-4.1',
+  reviewEnabled: true,
+  consistencyEnabled: false,
 });
 
 const generate = adapter.tools.find((t) => t.name === 'gpt_image_generate');
@@ -122,8 +125,32 @@ const result = await generate.execute('demo-call', {
 
 - `OPENAI_API_BASE`（默认 `https://api.openai.com/v1`）
 - `GPT_IMAGE_OUTPUT_DIR`（默认 `./work_dir/generated_images_gpt_image_2`）
+- `GPT_IMAGE_REVIEW_MODEL`（`review` 默认模型；未设置时最终回退 `gpt-4o`）
+- `GPT_IMAGE_CONSISTENCY_MODEL`（`consistency` 默认模型；未设置时最终回退 `gpt-4o`）
+- `GPT_IMAGE_REVIEW_ENABLED`（`true/false/1/0/on/off`，默认 `true`）
+- `GPT_IMAGE_CONSISTENCY_ENABLED`（`true/false/1/0/on/off`，默认 `true`）
 
-评审与一致性工具默认模型为 `gpt-4o`；可通过 `--model` 指定任何与 `/v1/chat/completions` 兼容的多模态模型。
+`review` / `consistency` 的优先级为：显式参数（如 `--model`） > `--config-file` JSON > runtime / 环境变量 > 代码兜底值。
+
+当 `GPT_IMAGE_REVIEW_ENABLED=false` 或 `GPT_IMAGE_CONSISTENCY_ENABLED=false` 时，对应命令会被直接拒绝执行。
+
+示例：`review-config.json`
+
+```json
+{
+  "model": "gpt-4.1",
+  "images": ["work_dir/generated_images_gpt_image_2/demo/image_001.png"],
+  "brief": "新品封面，调性克制、真实、适合电商首图",
+  "temperature": 0.1,
+  "maxTokens": 1800
+}
+```
+
+```bash
+node cli/index.js review --config-file review-config.json --model gpt-4o-mini
+```
+
+上例中最终会使用 `gpt-4o-mini`，因为显式参数优先级高于配置文件。
 
 ## 设计工作流
 

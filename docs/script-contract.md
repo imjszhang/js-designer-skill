@@ -33,6 +33,22 @@ Optional:
 
 - `OPENAI_API_BASE` — override API root (defaults to `https://api.openai.com/v1`).
 - `GPT_IMAGE_OUTPUT_DIR` — default output root; defaults to `./work_dir/generated_images_gpt_image_2`.
+- `GPT_IMAGE_REVIEW_MODEL` — default multimodal model for `review`; final fallback is `gpt-4o`.
+- `GPT_IMAGE_CONSISTENCY_MODEL` — default multimodal model for `consistency`; final fallback is `gpt-4o`.
+- `GPT_IMAGE_REVIEW_ENABLED` — feature gate for `review`; accepts `true/false/1/0/on/off`, defaults to `true`.
+- `GPT_IMAGE_CONSISTENCY_ENABLED` — feature gate for `consistency`; accepts `true/false/1/0/on/off`, defaults to `true`.
+
+Priority for `review` / `consistency`: explicit params > `--config-file` JSON > runtime / env > code fallback.
+
+Example config file:
+
+```json
+{
+  "model": "gpt-4.1",
+  "temperature": 0.1,
+  "maxTokens": 1800
+}
+```
 
 ## generate (gpt_image_generate)
 
@@ -88,7 +104,8 @@ Read one or more generated images, evaluate against the 7-dimension rubric in [r
 | image input (File API id) | `--image-file-id <id>` |
 | brief text | `--brief "…"` or `--brief-file <path>` |
 | custom rubric | `--rubric-file <path>` |
-| review model | `--model` (default `gpt-4o`) |
+| config file | `--config-file <path>` |
+| review model | `--model` (default from `GPT_IMAGE_REVIEW_MODEL`, final fallback `gpt-4o`) |
 | output root | `--output-dir` |
 | session name | `--session-name` |
 | backend override | `--base-url` |
@@ -132,6 +149,8 @@ Writes `review_result.json` in `<outputDir>/<sessionName>/` containing:
 }
 ```
 
+If `GPT_IMAGE_REVIEW_ENABLED=false`, the command exits early with a clear feature-disabled error.
+
 ## consistency (gpt_image_consistency)
 
 Check a series of images against a set of locked visual variables; report per-variable scores and per-outlier fix suggestions.
@@ -146,7 +165,8 @@ Check a series of images against a set of locked visual variables; report per-va
 | locked variables | `--locked <a,b,c>` (palette, lighting, framing, texture, character, typography, aspect_ratio, brand_cues) |
 | permitted variance description | `--permitted "…"` |
 | brief | `--brief "…"` or `--brief-file <path>` |
-| model | `--model` (default `gpt-4o`) |
+| config file | `--config-file <path>` |
+| model | `--model` (default from `GPT_IMAGE_CONSISTENCY_MODEL`, final fallback `gpt-4o`) |
 | output root | `--output-dir` |
 | session name | `--session-name` |
 | backend override | `--base-url` |
@@ -189,6 +209,8 @@ Writes `consistency_result.json` in `<outputDir>/<sessionName>/` containing:
   }
 }
 ```
+
+If `GPT_IMAGE_CONSISTENCY_ENABLED=false`, the command exits early with a clear feature-disabled error.
 
 ## Review priorities after any execution
 

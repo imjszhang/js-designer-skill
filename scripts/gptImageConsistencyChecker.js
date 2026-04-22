@@ -3,6 +3,7 @@
 /**
  * 一致性检查工具：输入一组已生成图 + 锁定变量清单，
  * 通过多模态模型检测系列间的风格偏差，输出结构化差异报告与修正建议。
+ * 默认模型优先取 runtime/config/env，最后才回退到 gpt-4o。
  *
  * 主要字段：
  *   images          本地图片路径数组（至少 2 张，建议 ≤ 8）
@@ -12,7 +13,7 @@
  *                   aspect_ratio, brand_cues
  *   permittedVariance  可选。描述哪些维度可以变（纯文本）
  *   brief           可选的 brief 文本
- *   model           默认 gpt-4o
+ *   model           一致性检查模型；未传时最终回退到 gpt-4o
  *   outputDir/sessionName/baseUrl/apiKey 同 reviewer
  */
 

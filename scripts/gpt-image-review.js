@@ -46,14 +46,16 @@ function printUsage() {
   console.log('  --brief "…"                 brief 文本（建议附结构化 brief 提升评审准确度）');
   console.log('  --brief-file <path>         从文件读取 brief');
   console.log('  --rubric-file <path>        从文件读取自定义 rubric（默认内置 7 维 rubric）');
+  console.log('  --config-file <path>        从 JSON 读取参数；显式参数优先级高于配置文件');
   console.log('\n其他:');
-  console.log('  --model <name>              评审模型，默认 gpt-4o');
+  console.log('  --model <name>              评审模型；默认取 GPT_IMAGE_REVIEW_MODEL，最终回退 gpt-4o');
   console.log('  --output-dir <dir>          结果保存根目录');
   console.log('  --session-name <name>       会话目录名');
   console.log('  --temperature <n>           默认 0.2');
   console.log('  --max-tokens <n>            默认 2000');
   console.log('  --base-url <url>            自定义 API 根');
   console.log('  --api-key <key>             覆盖 OPENAI_API_KEY');
+  console.log('  功能开关:                   GPT_IMAGE_REVIEW_ENABLED=false 时将拒绝执行');
 }
 
 async function main() {
