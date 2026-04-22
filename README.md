@@ -1,4 +1,4 @@
-# js-gpt-image-designer-skill
+# js-designer-skill
 
 一个按 `js-eyes` 风格组织的设计师图像 Skill 包。它把图像工作拆成两层：
 
