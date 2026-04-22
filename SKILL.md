@@ -19,11 +19,25 @@ metadata:
 | 工具 | 说明 |
 |------|------|
 | `gpt_image_generate` | 调用本地 gpt-image-2 生成器，支持 prompt、尺寸、质量、输出目录和会话命名 |
+| `gpt_image_edit` | 以一张或多张参考图（可选 mask）调用 `/v1/images/edits` 生成新图 |
 
 ## CLI
 
 ```bash
+# 文生图
 node cli/index.js generate --prompt "一张高级感海报" --n 3 --quality high
+
+# 以参考图编辑（本地文件 multipart；可多张，最多 16；可选 mask 做局部改）
+node cli/index.js edit \
+  --prompt "保留整体构图，改为冷调、加少量雾气，顶部 1/4 留给标题" \
+  --image work_dir/generated_images_gpt_image_2/skill-smoke-test/image_001_2026-04-22T15-12-07.png \
+  --n 1 --quality high --session-name brand-kv-v2
+
+# 以远程/上传方式提供参考图（JSON 模式）
+node cli/index.js edit --prompt "..." \
+  --image-url https://example.com/ref.png \
+  --mask-url https://example.com/mask.png \
+  --n 1
 ```
 
 ## 默认工作流

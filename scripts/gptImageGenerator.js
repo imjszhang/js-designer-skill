@@ -82,7 +82,7 @@ class GptImage2Generator {
     if (!this.config.apiKey) {
       throw new Error('必须提供 API 密钥: 在 .env 中设置 OPENAI_API_KEY 或使用 --api-key');
     }
-    if (this.config.n < 1 || this.config.n > 10) {
+    if (!Number.isFinite(this.config.n) || this.config.n < 1 || this.config.n > 10) {
       throw new Error('生成张数 n 需在 1-10 之间');
     }
     if (!SUPPORTED_FORMATS.includes(this.config.responseFormat)) {
@@ -226,7 +226,7 @@ class GptImage2Generator {
           console.log(`已下载: ${imagePath}`);
           resolve(imagePath);
         });
-        file.on('err', (e) => reject(e));
+        file.on('error', (e) => reject(e));
       });
       req.on('error', (e) => reject(e));
       req.setTimeout(this.config.timeout, () => {

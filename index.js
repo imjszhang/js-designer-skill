@@ -8,6 +8,10 @@ const COMMANDS = {
     module: './scripts/gpt-image-generate',
     description: '调用 gpt-image 生成脚本输出图片',
   },
+  edit: {
+    module: './scripts/gpt-image-edit',
+    description: '调用 gpt-image 编辑接口，以一张或多张参考图生成新图（可选 mask 局部编辑）',
+  },
 };
 
 function printUsage() {

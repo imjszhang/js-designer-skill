@@ -2,10 +2,11 @@
 
 const pkg = require('./package.json');
 const { resolveRuntimeConfig } = require('./lib/runtimeConfig');
-const { generateImage } = require('./lib/api');
+const { generateImage, editImage } = require('./lib/api');
 
 const CLI_COMMANDS = [
   { name: 'generate', description: '调用 gpt-image-2 生成图片' },
+  { name: 'edit', description: '以参考图（可选 mask）调用 gpt-image-2 编辑接口生成新图' },
 ];
 
 function makeLogger(logger) {
@@ -56,6 +57,61 @@ const TOOL_DEFINITIONS = [
     optional: true,
     async execute(runtime, params) {
       return generateImage(runtime.config, params);
+    },
+  },
+  {
+    name: 'gpt_image_edit',
+    label: 'GPT Image Designer: Edit (with reference images)',
+    description: '以参考图调用 gpt-image-2 /images/edits 接口生成新图；支持多张参考图与可选 mask 局部编辑。',
+    parameters: {
+      type: 'object',
+      properties: {
+        prompt: { type: 'string', description: '编辑提示词' },
+        images: {
+          type: 'array',
+          items: { type: 'string' },
+          description: '本地参考图文件路径数组（1-16 张，multipart 方式）',
+        },
+        imagesJson: {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: {
+              file_id: { type: 'string' },
+              image_url: { type: 'string' },
+            },
+          },
+          description: 'JSON 方式参考图数组：file_id 或 image_url(URL/data URL)',
+        },
+        mask: { type: 'string', description: '本地 mask 文件路径（局部编辑，配合 images 本地数组）' },
+        maskJson: {
+          type: 'object',
+          properties: {
+            file_id: { type: 'string' },
+            image_url: { type: 'string' },
+          },
+          description: 'JSON 方式 mask（配合 imagesJson）',
+        },
+        model: { type: 'string', description: '模型名，默认 gpt-image-2' },
+        n: { type: 'number', description: '生成张数 1-10' },
+        size: { type: 'string', description: 'auto|1024x1024|1536x1024|1024x1536' },
+        quality: { type: 'string', enum: ['low', 'medium', 'high', 'auto'] },
+        outputFormat: { type: 'string', enum: ['png', 'jpeg', 'webp'] },
+        outputCompression: { type: 'number', description: '0-100（jpeg/webp）' },
+        background: { type: 'string', enum: ['transparent', 'opaque', 'auto'] },
+        inputFidelity: { type: 'string', enum: ['high', 'low'] },
+        moderation: { type: 'string', enum: ['auto', 'low'] },
+        outputDir: { type: 'string' },
+        sessionName: { type: 'string' },
+        baseUrl: { type: 'string' },
+        apiKey: { type: 'string' },
+        user: { type: 'string' },
+      },
+      required: ['prompt'],
+    },
+    optional: true,
+    async execute(runtime, params) {
+      return editImage(runtime.config, params);
     },
   },
 ];
