@@ -152,6 +152,17 @@ anti_references : 明确要避免什么
 
 Gate 通过后才能继续。Gate 未通过回退到相应 Mode，不要在同一层反复修改。
 
+## 本地参考目录（`references/`）
+
+`references/` 是用户在实际使用中自行创建和维护的本地参考资料目录，不属于仓库内置知识库的一部分。
+
+使用约定：
+
+1. 当用户明确提供本地参考资料，或任务显然依赖用户私有素材时，应优先读取 `references/` 中相关文件，再进入 Prompt Director 或评审流程。
+2. 如果 `references/` 不存在、为空，或没有与当前任务相关的文件，则继续使用 `docs/` 中的工作流、知识卡和模板，不要因为缺少本地参考而阻塞流程。
+3. `references/` 中的内容可能包含隐私信息、项目敏感信息或临时素材，默认不应提交到仓库。
+4. `docs/` 用于沉淀可版本化、可复用、可共享的方法与知识；`references/` 用于存放本地、私有、任务相关的输入材料。不要混用两者。
+
 ## CLI
 
 ```bash
@@ -209,6 +220,8 @@ js-designer-skill/
 ├── package.json
 ├── skill.contract.js
 ├── index.js
+├── references/
+│   └── README.md                  本地参考目录说明（真实内容默认不提交）
 ├── cli/
 │   └── index.js
 ├── lib/
