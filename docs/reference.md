@@ -30,6 +30,7 @@ For task-specific brand or project style systems, load the matching subdirectory
 | `open-design/` | `open-design-editorial-monocle.md` | Editorial Monocle magazine aesthetic |
 | `sketchnote-editorial/` | `design.md` | X Article hand-drawn sketchnote infographics (crumpled paper, black + orange) |
 | `youtube-thumbnail/` | `youtube-thumbnail-system.md` | YouTube / video thumbnails with real-person edit |
+| `napkin-one-pager/` | `napkin-one-pager-system.md` | One-page napkin-sketch infographics (3×3 cards + build order) |
 
 These are local, private inputs. Reusable methodology stays in `docs/`.
 

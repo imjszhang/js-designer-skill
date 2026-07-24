@@ -21,8 +21,12 @@ references/
 ├── sketchnote-editorial/           X Article 手绘信息图（皱纸 sketchnote）
 │   ├── design.md                   完整风格系统 + prompt 模板 + 样例索引
 │   └── samples/                    风格母版与验证样例（jpg/png）
-└── youtube-thumbnail/              YouTube 封面生成体系
-    └── youtube-thumbnail-system.md
+├── youtube-thumbnail/              YouTube 封面生成体系
+│   └── youtube-thumbnail-system.md
+└── napkin-one-pager/               单页 napkin-sketch 信息图模版
+    ├── napkin-one-pager-system.md
+    ├── assets/reference-graph-engineering.png
+    └── content/                    graph-engineering-en.md, agent-loops-praxis-en.md 等
 ```
 
 ## 使用方式
@@ -34,6 +38,7 @@ references/
 | Editorial Monocle 杂志风 | `open-design/open-design-editorial-monocle.md` |
 | X Article 手绘信息图 / 教程风 sketchnote | `sketchnote-editorial/design.md` |
 | YouTube / 视频封面 | `youtube-thumbnail/youtube-thumbnail-system.md` |
+| 单页课程/流程 napkin 信息图 | `napkin-one-pager/napkin-one-pager-system.md` + `content/<topic>.md` |
 
 代码中的路径常量见 `lib/referencePaths.js`。
 

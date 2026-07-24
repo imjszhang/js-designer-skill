@@ -63,6 +63,8 @@ Create an infographic about the 2026 AI image workflow for marketers. It should 
 
 Text correctness and chart readability are P0 for this workflow (see [rubric/aesthetic-7dim.md](rubric/aesthetic-7dim.md)).
 
+**Napkin one-pager variant**: load [../references/napkin-one-pager/napkin-one-pager-system.md](../references/napkin-one-pager/napkin-one-pager-system.md) and topic copy from `content/graph-engineering-en.md` (or a new `content/<topic>.md`). Gate B: confirm 3×3 card grid + Build Order footer before generate. Reference image: `assets/reference-graph-engineering.png`; swap topic via edit mode when layout must stay fixed.
+
 ## Example 4: Critique And Iterate  →  Critique And Improve
 
 **Task type**: `critique_and_improve`

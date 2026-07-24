@@ -165,6 +165,7 @@ Gate 通过后才能继续。Gate 未通过回退到相应 Mode，不要在同�
 | `open-design/` | open-design Editorial Monocle 杂志风 | `open-design-editorial-monocle.md` |
 | `sketchnote-editorial/` | X Article 手绘信息图（皱纸 sketchnote） | `design.md` |
 | `youtube-thumbnail/` | YouTube / 视频封面生成体系 | `youtube-thumbnail-system.md` |
+| `napkin-one-pager/` | 单页 napkin-sketch 信息图（3×3 + Build Order） | `napkin-one-pager-system.md` |
 
 使用约定：
 
@@ -236,7 +237,8 @@ js-designer-skill/
 │   ├── aipoch/                    AIPOCH 品牌视觉规范与官网 CSS
 │   ├── cyber-taoist/              JS Cyber-Taoist 风格系统
 │   ├── open-design/               Editorial Monocle 风格参考
-│   └── youtube-thumbnail/         视频封面生成体系
+│   ├── youtube-thumbnail/         视频封面生成体系
+│   └── napkin-one-pager/          单页 napkin-sketch 信息图模版
 ├── cli/
 │   └── index.js
 ├── lib/

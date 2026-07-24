@@ -22,7 +22,8 @@ js-designer-skill/
 │   ├── aipoch/             AIPOCH 品牌视觉规范与官网 CSS
 │   ├── cyber-taoist/       JS Cyber-Taoist 风格系统
 │   ├── open-design/        Editorial Monocle 风格参考
-│   └── youtube-thumbnail/  视频封面生成体系
+│   ├── youtube-thumbnail/  视频封面生成体系
+│   └── napkin-one-pager/   单页 napkin-sketch 信息图模版
 ├── lib/
 │   ├── api.js              业务 API：generateImage / editImage / reviewImages / checkConsistency
 │   ├── runtimeConfig.js    环境变量与默认值
@@ -191,6 +192,7 @@ node cli/index.js review --config-file review-config.json --model gpt-4o-mini
 | `cyber-taoist/` | `cyber-taoist-real.md` |
 | `open-design/` | `open-design-editorial-monocle.md` |
 | `youtube-thumbnail/` | `youtube-thumbnail-system.md` |
+| `napkin-one-pager/` | `napkin-one-pager-system.md` |
 
 ## 进一步阅读
 
