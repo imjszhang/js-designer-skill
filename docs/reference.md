@@ -17,11 +17,11 @@ Agents should load a specific card on demand rather than reading everything here
 | running a real task end to end | [workflows/](workflows/) |
 | picking a ready-made example | [examples.md](examples.md) |
 | bind scripts to CLI / tools | [script-contract.md](script-contract.md) |
-| load local brand / project style specs | [../references/README.md](../references/README.md) |
+| load a built-in visual style template | [../references/README.md](../references/README.md) |
 
-## Local References (`references/`)
+## Visual Style Templates (`references/`)
 
-For task-specific brand or project style systems, load the matching subdirectory before writing prompts. Path constants live in `lib/referencePaths.js`.
+`references/` ships with the Skill. When a task matches a style pack, load that subdirectory before writing prompts. Path constants live in `lib/referencePaths.js`.
 
 | Subdirectory | Entry file | Typical use |
 |---|---|---|
@@ -32,7 +32,7 @@ For task-specific brand or project style systems, load the matching subdirectory
 | `youtube-thumbnail/` | `youtube-thumbnail-system.md` | YouTube / video thumbnails with real-person edit |
 | `napkin-one-pager/` | `napkin-one-pager-system.md` | One-page napkin-sketch infographics (3×3 cards + build order) |
 
-These are local, private inputs. Reusable methodology stays in `docs/`.
+These are versioned style systems. Reusable methodology stays in `docs/`. Do not put secrets or private assets here.
 
 ## Core Aphorisms (the five that never change)
 

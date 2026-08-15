@@ -18,10 +18,11 @@ js-designer-skill/
 ├── cli/
 │   └── index.js            CLI 包装层
 ├── references/
-│   ├── README.md           本地参考子目录索引（默认不提交）
+│   ├── README.md           视觉风格模版索引
 │   ├── aipoch/             AIPOCH 品牌视觉规范与官网 CSS
 │   ├── cyber-taoist/       JS Cyber-Taoist 风格系统
 │   ├── open-design/        Editorial Monocle 风格参考
+│   ├── sketchnote-editorial/ X Article 手绘信息图
 │   ├── youtube-thumbnail/  视频封面生成体系
 │   └── napkin-one-pager/   单页 napkin-sketch 信息图模版
 ├── lib/
@@ -182,21 +183,22 @@ node cli/index.js review --config-file review-config.json --model gpt-4o-mini
 4. 信息图优先保证正确和可读，再考虑装饰。
 5. 系列图先锁定统一变量，再放开局部变化。
 
-## 本地参考资料
+## 视觉风格模版
 
-`references/` 按品牌或项目分子目录，存放私有风格规范与素材说明。路径常量见 `lib/referencePaths.js`。
+`references/` 是仓库内置的视觉风格模版，按风格分子目录存放，随仓库一并版本化。路径常量见 `lib/referencePaths.js`。
 
 | 子目录 | 入口文件 |
 |--------|----------|
 | `aipoch/` | `AIPOCH-DESIGN-SYSTEM.md` |
 | `cyber-taoist/` | `cyber-taoist-real.md` |
 | `open-design/` | `open-design-editorial-monocle.md` |
+| `sketchnote-editorial/` | `design.md` |
 | `youtube-thumbnail/` | `youtube-thumbnail-system.md` |
 | `napkin-one-pager/` | `napkin-one-pager-system.md` |
 
 ## 进一步阅读
 
-- [references/README.md](references/README.md) · 本地参考子目录说明
+- [references/README.md](references/README.md) · 视觉风格模版索引
 - [SKILL.md](SKILL.md) · Skill 认知入口
 - [docs/reference.md](docs/reference.md) · 索引与核心口诀
 - [docs/examples.md](docs/examples.md) · 5 类任务示例

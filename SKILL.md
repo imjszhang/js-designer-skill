@@ -152,9 +152,9 @@ anti_references : 明确要避免什么
 
 Gate 通过后才能继续。Gate 未通过回退到相应 Mode，不要在同一层反复修改。
 
-## 本地参考目录（`references/`）
+## 视觉风格模版（`references/`）
 
-`references/` 是用户在实际使用中自行创建和维护的本地参考资料目录，不属于仓库内置知识库的一部分。内容按品牌或项目分子目录存放。
+`references/` 是仓库内置的视觉风格模版，按风格分子目录存放，随 Skill 一并版本化。任务匹配某套风格时，先读对应入口文件，再进入 Prompt Director 或评审。
 
 当前子目录：
 
@@ -169,10 +169,10 @@ Gate 通过后才能继续。Gate 未通过回退到相应 Mode，不要在同�
 
 使用约定：
 
-1. 当用户明确提供本地参考资料，或任务显然依赖用户私有素材时，应优先读取 `references/<子目录>/` 中相关文件，再进入 Prompt Director 或评审流程。
-2. 如果 `references/` 不存在、为空，或没有与当前任务相关的子目录，则继续使用 `docs/` 中的工作流、知识卡和模板，不要因为缺少本地参考而阻塞流程。
-3. `references/` 中的内容可能包含隐私信息、项目敏感信息或临时素材，默认不应提交到仓库。
-4. `docs/` 用于沉淀可版本化、可复用、可共享的方法与知识；`references/` 用于存放本地、私有、任务相关的输入材料。不要混用两者。
+1. 任务明显属于某套风格（品牌 PPT、赛博道家海报、杂志插画、X 手绘信息图、视频封面、napkin 单页图）时，优先读取 `references/<子目录>/`，再进入 Prompt Director 或评审。
+2. 没有匹配的风格模版时，继续使用 `docs/` 中的工作流、知识卡和 8 层模板，不要阻塞流程。
+3. `docs/` 沉淀方法论；`references/` 沉淀可复用的视觉风格系统。不要混用。
+4. 新增风格模版应入库，并在本表、`references/README.md`、`lib/referencePaths.js` 中登记。含隐私或密钥的素材不要放进 `references/`。
 5. 脚本中的路径常量统一由 `lib/referencePaths.js` 维护。
 
 ## CLI
@@ -233,10 +233,11 @@ js-designer-skill/
 ├── skill.contract.js
 ├── index.js
 ├── references/
-│   ├── README.md                  本地参考目录说明（真实内容默认不提交）
+│   ├── README.md                  视觉风格模版索引
 │   ├── aipoch/                    AIPOCH 品牌视觉规范与官网 CSS
 │   ├── cyber-taoist/              JS Cyber-Taoist 风格系统
 │   ├── open-design/               Editorial Monocle 风格参考
+│   ├── sketchnote-editorial/      X Article 手绘信息图
 │   ├── youtube-thumbnail/         视频封面生成体系
 │   └── napkin-one-pager/          单页 napkin-sketch 信息图模版
 ├── cli/
@@ -280,7 +281,7 @@ js-designer-skill/
 
 ## 参考文档索引
 
-- [references/README.md](references/README.md)：本地参考子目录索引（`aipoch/`、`cyber-taoist/` 等）
+- [references/README.md](references/README.md)：视觉风格模版索引（`aipoch/`、`cyber-taoist/` 等）
 - [docs/reference.md](docs/reference.md)：核心口诀与索引
 - [docs/examples.md](docs/examples.md)：5 类任务示例，链到对应 workflow
 - [docs/script-contract.md](docs/script-contract.md)：脚本参数与执行约定
