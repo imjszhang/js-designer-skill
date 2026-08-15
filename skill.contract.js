@@ -2,13 +2,14 @@
 
 const pkg = require('./package.json');
 const { resolveRuntimeConfig } = require('./lib/runtimeConfig');
-const { generateImage, editImage, reviewImages, checkConsistency } = require('./lib/api');
+const { generateImage, editImage, reviewImages, extractStyle, checkConsistency } = require('./lib/api');
 
 const CLI_COMMANDS = [
   { name: 'generate', description: '调用 gpt-image-2 生成图片' },
   { name: 'edit', description: '以参考图（可选 mask）调用 gpt-image-2 编辑接口生成新图' },
   { name: 'review', description: '按 7 维 rubric 对一张或多张图做结构化评审（默认模型与开关可配置）' },
   { name: 'consistency', description: '在一组图上做一致性检查，报告锁定变量的偏差与修正建议（默认模型与开关可配置）' },
+  { name: 'extract', description: '从参考图抽取可复用视觉风格系统（Style Lock + design.md 草稿）' },
 ];
 
 function makeLogger(logger) {
@@ -202,6 +203,50 @@ const TOOL_DEFINITIONS = [
     optional: true,
     async execute(runtime, params) {
       return checkConsistency(runtime.config, params);
+    },
+  },
+  {
+    name: 'gpt_image_extract',
+    label: 'GPT Image Designer: Style Extract',
+    description: '从一张或多张参考图蒸馏可复用视觉风格系统，输出 Style Lock 与 design.md 草稿。',
+    parameters: {
+      type: 'object',
+      properties: {
+        images: {
+          type: 'array',
+          items: { type: 'string' },
+          description: '本地图片路径数组（1-10 张）',
+        },
+        roles: {
+          type: 'array',
+          items: { type: 'string' },
+          description: '与 images 按下标配对的角色（cover|inline|table|other）',
+        },
+        imagesJson: {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: {
+              file_id: { type: 'string' },
+              image_url: { type: 'string' },
+            },
+          },
+          description: 'JSON 方式：file_id 或 image_url(URL/data URL)',
+        },
+        brief: { type: 'string', description: '来源说明与抽取约束（抽视觉系统，不是评质量）' },
+        model: { type: 'string', description: '多模态模型；默认 GPT_IMAGE_EXTRACT_MODEL → GPT_IMAGE_REVIEW_MODEL → gpt-4o' },
+        temperature: { type: 'number' },
+        maxTokens: { type: 'number' },
+        configFile: { type: 'string', description: '从 JSON 配置文件读取参数；显式传入的字段优先级更高' },
+        outputDir: { type: 'string' },
+        sessionName: { type: 'string' },
+        baseUrl: { type: 'string' },
+        apiKey: { type: 'string' },
+      },
+    },
+    optional: true,
+    async execute(runtime, params) {
+      return extractStyle(runtime.config, params);
     },
   },
 ];

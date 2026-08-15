@@ -1,7 +1,7 @@
 ---
 name: js-designer-skill
 description: 面向图像生成与视觉策略的设计师 skill。提供任务路由、5 种设计思考模式、7 维评审与一致性检查，并把决策落地为 gpt-image-2 的执行调用。适用于海报、封面、品牌视觉、社媒图、信息图、评图迭代与系列图。
-version: 1.0.0
+version: 1.1.0
 metadata:
   openclaw:
     emoji: "\U0001F3A8"
@@ -25,6 +25,7 @@ metadata:
 | `gpt_image_edit` | 执行 | 以一张或多张参考图（可选 mask）调 `/v1/images/edits` 生成/编辑新图 |
 | `gpt_image_review` | 评审 | 吃一张或多张已生成图 + brief，按 7 维评审卡输出结构化评分与改进建议 |
 | `gpt_image_consistency` | 评审 | 吃一组图 + 锁定变量，输出一致性差异、离群点、修正 prompt 建议 |
+| `gpt_image_extract` | 抽取 | 从参考图蒸馏可复用视觉风格系统（Style Lock + design.md 草稿） |
 
 ## Task Router（任务路由）
 
@@ -204,6 +205,12 @@ node cli/index.js consistency \
   --image work_dir/.../image_002.png \
   --image work_dir/.../image_003.png \
   --locked palette,lighting,texture,character,typography
+
+# 从参考图抽取可复用风格系统
+node cli/index.js extract \
+  --image cover.jpg --role cover \
+  --image inline-2.jpg --role inline \
+  --brief "X Article visual system; distill style, do not score quality"
 ```
 
 ## 编程 API
@@ -252,12 +259,14 @@ js-designer-skill/
 │   ├── gpt-image-edit.js
 │   ├── gpt-image-review.js
 │   ├── gpt-image-consistency.js
+│   ├── gpt-image-extract.js
 │   ├── gen-single.js                单张 AIPOCH 董事会幻灯片生成
 │   ├── generate-board-slides.js     批量 AIPOCH 董事会幻灯片生成
 │   ├── gptImageGenerator.js
 │   ├── gptImageEditor.js
 │   ├── gptImageReviewer.js
-│   └── gptImageConsistencyChecker.js
+│   ├── gptImageConsistencyChecker.js
+│   └── gptImageStyleExtractor.js
 └── docs/
     ├── reference.md               索引 + 核心口诀
     ├── examples.md                5 类任务的示例

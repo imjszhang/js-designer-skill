@@ -26,7 +26,7 @@ js-designer-skill/
 │   ├── youtube-thumbnail/  视频封面生成体系
 │   └── napkin-one-pager/   单页 napkin-sketch 信息图模版
 ├── lib/
-│   ├── api.js              业务 API：generateImage / editImage / reviewImages / checkConsistency
+│   ├── api.js              业务 API：generateImage / editImage / reviewImages / extractStyle / checkConsistency
 │   ├── runtimeConfig.js    环境变量与默认值
 │   ├── referencePaths.js   references/ 子目录路径常量
 │   └── boardSlides.js      AIPOCH 董事会幻灯片数据
@@ -35,12 +35,14 @@ js-designer-skill/
 │   ├── gpt-image-edit.js                CLI 入口：参考图编辑
 │   ├── gpt-image-review.js              CLI 入口：7 维评审
 │   ├── gpt-image-consistency.js         CLI 入口：系列一致性
+│   ├── gpt-image-extract.js             CLI 入口：风格抽取
 │   ├── gen-single.js                    单张 AIPOCH 董事会幻灯片生成
 │   ├── generate-board-slides.js         批量 AIPOCH 董事会幻灯片生成
 │   ├── gptImageGenerator.js             底层：/v1/images/generations
 │   ├── gptImageEditor.js                底层：/v1/images/edits
 │   ├── gptImageReviewer.js              底层：多模态 /v1/chat/completions
-│   └── gptImageConsistencyChecker.js    底层：多模态 /v1/chat/completions
+│   ├── gptImageConsistencyChecker.js    底层：多模态 /v1/chat/completions
+│   └── gptImageStyleExtractor.js        底层：多模态风格抽取
 └── docs/
     ├── reference.md        索引 + 核心口诀
     ├── examples.md         5 类任务示例 → 对应 workflow
@@ -64,7 +66,7 @@ js-designer-skill/
 
 ## 提供的能力
 
-Skill 暴露 4 个工具：
+Skill 暴露 5 个工具：
 
 | 工具 | 类型 | 说明 |
 |------|------|------|
@@ -72,8 +74,9 @@ Skill 暴露 4 个工具：
 | `gpt_image_edit` | 执行 | 以参考图（可选 mask）调 `/v1/images/edits` 生成/编辑 |
 | `gpt_image_review` | 评审 | 按 7 维 rubric 对一组图输出结构化评审 JSON |
 | `gpt_image_consistency` | 评审 | 在一组图上检查锁定变量的偏差，输出离群与修正建议 |
+| `gpt_image_extract` | 抽取 | 从参考图蒸馏可复用视觉风格系统（Style Lock + design.md） |
 
-对应 CLI 子命令：`generate | edit | review | consistency`。
+对应 CLI 子命令：`generate | edit | review | consistency | extract`。
 
 ## 使用方式
 
@@ -98,6 +101,12 @@ node cli/index.js review \
 node cli/index.js consistency \
   --image a.png --image b.png --image c.png \
   --locked palette,lighting,texture,typography
+
+# 从参考图抽取风格系统
+node cli/index.js extract \
+  --image cover.jpg --role cover \
+  --image inline.jpg --role inline \
+  --brief "Distill a reusable visual system; do not score quality"
 ```
 
 ### 2. 通过 npm script
@@ -141,10 +150,12 @@ const result = await generate.execute('demo-call', {
 - `GPT_IMAGE_CONSISTENCY_MODEL`（`consistency` 默认模型；未设置时最终回退 `gpt-4o`）
 - `GPT_IMAGE_REVIEW_ENABLED`（`true/false/1/0/on/off`，默认 `true`）
 - `GPT_IMAGE_CONSISTENCY_ENABLED`（`true/false/1/0/on/off`，默认 `true`）
+- `GPT_IMAGE_EXTRACT_MODEL`（`extract` 默认模型；未设置时回退 `GPT_IMAGE_REVIEW_MODEL`，最终回退 `gpt-4o`）
+- `GPT_IMAGE_EXTRACT_ENABLED`（`true/false/1/0/on/off`，默认 `true`）
 
-`review` / `consistency` 的优先级为：显式参数（如 `--model`） > `--config-file` JSON > runtime / 环境变量 > 代码兜底值。
+`review` / `consistency` / `extract` 的优先级为：显式参数（如 `--model`） > `--config-file` JSON > runtime / 环境变量 > 代码兜底值。
 
-当 `GPT_IMAGE_REVIEW_ENABLED=false` 或 `GPT_IMAGE_CONSISTENCY_ENABLED=false` 时，对应命令会被直接拒绝执行。
+当 `GPT_IMAGE_REVIEW_ENABLED=false`、`GPT_IMAGE_CONSISTENCY_ENABLED=false` 或 `GPT_IMAGE_EXTRACT_ENABLED=false` 时，对应命令会被直接拒绝执行。
 
 示例：`review-config.json`
 

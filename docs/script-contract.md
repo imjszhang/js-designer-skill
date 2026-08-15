@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This skill ships with four bundled scripts, paired as (core class + CLI wrapper):
+This skill ships with five bundled scripts, paired as (core class + CLI wrapper):
 
 | Concern | Core class | CLI wrapper |
 |---|---|---|
@@ -10,17 +10,18 @@ This skill ships with four bundled scripts, paired as (core class + CLI wrapper)
 | reference-image edit (gpt-image-2 `/images/edits`) | `scripts/gptImageEditor.js` | `scripts/gpt-image-edit.js` |
 | 7-dimension review (multimodal chat completions) | `scripts/gptImageReviewer.js` | `scripts/gpt-image-review.js` |
 | series consistency check (multimodal chat completions) | `scripts/gptImageConsistencyChecker.js` | `scripts/gpt-image-consistency.js` |
+| style extract (multimodal chat completions) | `scripts/gptImageStyleExtractor.js` | `scripts/gpt-image-extract.js` |
 
-All four are reachable through `cli/index.js`:
+All five are reachable through `cli/index.js`:
 
 ```
-generate | edit | review | consistency
+generate | edit | review | consistency | extract
 ```
 
 And exposed as AI tools via `skill.contract.js`:
 
 ```
-gpt_image_generate | gpt_image_edit | gpt_image_review | gpt_image_consistency
+gpt_image_generate | gpt_image_edit | gpt_image_review | gpt_image_consistency | gpt_image_extract
 ```
 
 ## Environment
@@ -37,8 +38,10 @@ Optional:
 - `GPT_IMAGE_CONSISTENCY_MODEL` — default multimodal model for `consistency`; final fallback is `gpt-4o`.
 - `GPT_IMAGE_REVIEW_ENABLED` — feature gate for `review`; accepts `true/false/1/0/on/off`, defaults to `true`.
 - `GPT_IMAGE_CONSISTENCY_ENABLED` — feature gate for `consistency`; accepts `true/false/1/0/on/off`, defaults to `true`.
+- `GPT_IMAGE_EXTRACT_MODEL` — default multimodal model for `extract`; falls back to `GPT_IMAGE_REVIEW_MODEL`, then `gpt-4o`.
+- `GPT_IMAGE_EXTRACT_ENABLED` — feature gate for `extract`; accepts `true/false/1/0/on/off`, defaults to `true`.
 
-Priority for `review` / `consistency`: explicit params > `--config-file` JSON > runtime / env > code fallback.
+Priority for `review` / `consistency` / `extract`: explicit params > `--config-file` JSON > runtime / env > code fallback.
 
 Example config file:
 
@@ -211,6 +214,67 @@ Writes `consistency_result.json` in `<outputDir>/<sessionName>/` containing:
 ```
 
 If `GPT_IMAGE_CONSISTENCY_ENABLED=false`, the command exits early with a clear feature-disabled error.
+
+## extract (gpt_image_extract)
+
+Read one or more reference images and distill a reusable visual style system (Style Lock + `design.md` draft). This is not a quality review.
+
+### Parameter mapping
+
+| Concern | Script argument |
+|---|---|
+| image input (local) | `--image <file>` (repeatable, 1-10) |
+| image role | `--role <name>` (pairs with `--image` in order: cover / inline / table / other) |
+| image input (URL / data URL) | `--image-url <url>` |
+| image input (File API id) | `--image-file-id <id>` |
+| brief text | `--brief "…"` or `--brief-file <path>` |
+| config file | `--config-file <path>` |
+| extract model | `--model` (default from `GPT_IMAGE_EXTRACT_MODEL` → `GPT_IMAGE_REVIEW_MODEL` → `gpt-4o`) |
+| output root | `--output-dir` |
+| session name | `--session-name` |
+| backend override | `--base-url` |
+| decode temperature | `--temperature` (default 0.2) |
+| token budget | `--max-tokens` (default 4000) |
+
+### Command pattern
+
+```bash
+node cli/index.js extract \
+  --image cover.jpg --role cover \
+  --image inline-2.jpg --role inline \
+  --brief "X Article visual system from post 2063… Distill style, do not score quality." \
+  --session-name style-extract/kopadze-sketchnote
+```
+
+### Output contract
+
+Writes `extract_result.json` in `<outputDir>/<sessionName>/` containing:
+
+```json
+{
+  "extract": {
+    "pack_id_suggestion": "kebab-case",
+    "label": "",
+    "recommended_command": "edit",
+    "default_size": "1536x1024",
+    "palette": { "background": "", "ink": "", "accent": "", "hex": [] },
+    "typography": "",
+    "imagery_style": "",
+    "lighting": "",
+    "texture": "",
+    "composition": "",
+    "anti_references": [],
+    "style_lock": "一段可直接进 prompt 的英文围栏",
+    "locked_variables": ["palette", "texture", "typography"],
+    "origin_roles": { "origin_cover": 0, "origin_table": null },
+    "design_md": "# …完整风格文档草稿…"
+  }
+}
+```
+
+`style_lock` must be non-empty. `recommended_command` is `edit` or `generate`. `design_md` must include a heading containing `Style Lock` and a fenced ` ```text ` block.
+
+If `GPT_IMAGE_EXTRACT_ENABLED=false`, the command exits early with a clear feature-disabled error.
 
 ## Task-specific scripts
 

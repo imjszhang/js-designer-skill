@@ -20,6 +20,10 @@ const COMMANDS = {
     module: './scripts/gpt-image-consistency',
     description: '对一组图做一致性检查，报告锁定变量的偏差与修正建议',
   },
+  extract: {
+    module: './scripts/gpt-image-extract',
+    description: '从参考图抽取可复用视觉风格系统（Style Lock + design.md 草稿）',
+  },
 };
 
 function printUsage() {
