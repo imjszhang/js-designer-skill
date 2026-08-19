@@ -1,14 +1,14 @@
 /**
  * Generate a single board slide via LLMCORE gpt-image-2
  *
- * Style reference: references/aipoch/AIPOCH-DESIGN-SYSTEM.md
+ * Style reference: references/aipoch/DESIGN.md
  * Slide data: lib/boardSlides.js
  */
 require('dotenv').config();
 const https = require('https');
 const fs = require('fs');
 const path = require('path');
-const { slides, designSystemPath } = require('../lib/boardSlides');
+const { slides, assertAipochAssets } = require('../lib/boardSlides');
 
 const BASE_URL = (process.env.OPENAI_API_BASE || 'https://api.openai.com/v1').replace(/\/$/, '');
 const API_KEY = process.env.OPENAI_API_KEY;
@@ -21,8 +21,11 @@ if (!API_KEY) {
 
 const slideIndex = parseInt(process.argv[2]) || 0;
 
-if (!fs.existsSync(designSystemPath)) {
-  console.warn(`设计规范未找到: ${designSystemPath}`);
+try {
+  assertAipochAssets();
+} catch (error) {
+  console.error(error.message);
+  process.exit(1);
 }
 
 if (slideIndex < 0 || slideIndex >= slides.length) {

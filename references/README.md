@@ -7,10 +7,12 @@
 ```text
 references/
 ├── README.md
-├── aipoch/                         AIPOCH 品牌视觉（官网逆向 + PPT 规范）
-│   ├── AIPOCH-DESIGN-SYSTEM.md     设计规范（人类可读）
-│   ├── aipoch-css1.css             官网 Tailwind 编译样式
-│   └── aipoch-css2.css             官网字体加载模块
+├── aipoch/                         AIPOCH 官方品牌镜像 + 仓库演示扩展
+│   ├── DESIGN.md                   官方规则（DESIGN.md alpha）+ Repository Extensions
+│   ├── AIPOCH-DESIGN-SYSTEM.md     旧路径兼容说明
+│   ├── assets/                     Logo、品牌元素、12 背景、42 图标
+│   ├── aipoch-css1.css             2026-05 官网 CSS 历史快照
+│   └── aipoch-css2.css             2026-05 字体加载历史快照
 ├── cyber-taoist/                   JS Cyber-Taoist 视觉风格
 │   ├── cyber-taoist-real.md        完整风格系统
 │   └── cyber-taoist-character-prompt.md
@@ -31,7 +33,7 @@ references/
 
 | 任务场景 | 优先读取 |
 |----------|----------|
-| AIPOCH 品宣 / 董事会 PPT | `aipoch/AIPOCH-DESIGN-SYSTEM.md` |
+| AIPOCH 品牌 / 社媒 / 董事会 PPT | `aipoch/DESIGN.md`（官方规则 + Repository Extensions）+ `aipoch/assets/` |
 | JS 赛博道家海报 / 人物 | `cyber-taoist/cyber-taoist-real.md` |
 | Editorial Monocle 杂志风 | `open-design/open-design-editorial-monocle.md` |
 | X Article 手绘信息图 / 教程风 sketchnote | `sketchnote-editorial/design.md` |

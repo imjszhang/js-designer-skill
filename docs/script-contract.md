@@ -282,7 +282,7 @@ These scripts are not exposed as Skill tools. They wrap the same gpt-image-2 gen
 
 | Script | Purpose | Reference source |
 |---|---|---|
-| `scripts/gen-single.js` | Generate one AIPOCH board slide by index | `lib/boardSlides.js` → `references/aipoch/AIPOCH-DESIGN-SYSTEM.md` |
+| `scripts/gen-single.js` | Generate one AIPOCH board slide by index | `lib/boardSlides.js` reads Official + Repository Extensions from `references/aipoch/DESIGN.md` and requires `references/aipoch/assets/` |
 | `scripts/generate-board-slides.js` | Generate all AIPOCH board slides in sequence | same as above |
 
 ```bash

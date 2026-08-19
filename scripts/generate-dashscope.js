@@ -147,7 +147,7 @@ async function main() {
   try {
     // Test with first slide
     const result = await generateSlide(
-      'Corporate presentation slide, Neo-Brutalist style, warm gray #E8E8E8 background with subtle grid pattern. Large bold black Chinese characters "历史复盘" at top center. Below, a horizontal timeline with three white rectangular cards with black borders and hard drop shadows: first card says "岗位化 2006-2012", second says "工业化 2013-2017", third says "中台化 2018-2022". Warm yellow #ECD44C accent circles as timeline markers. Clean, academic, minimalist professional presentation design.',
+      'AIPOCH presentation slide, Frame layout, 16:9 safe frame. Warm #FCFCFA canvas. Title: 历史复盘. Horizontal timeline with three equal stages: 岗位化 2006-2012, 工业化 2013-2017, 中台化 2018-2022. Lucide-style outline icons. One #FBDD67 accent only. No global hard shadows.',
       'board-v2-04',
       'Slide 4 - 历史复盘'
     );

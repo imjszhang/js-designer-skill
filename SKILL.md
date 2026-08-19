@@ -161,7 +161,7 @@ Gate 通过后才能继续。Gate 未通过回退到相应 Mode，不要在同�
 
 | 子目录 | 用途 | 入口文件 |
 |--------|------|----------|
-| `aipoch/` | AIPOCH 品牌视觉（官网逆向 + PPT 规范） | `AIPOCH-DESIGN-SYSTEM.md` |
+| `aipoch/` | AIPOCH 官方品牌镜像 + 仓库演示扩展；素材见 `assets/` | `DESIGN.md` |
 | `cyber-taoist/` | JS Cyber-Taoist 海报与人物风格 | `cyber-taoist-real.md` |
 | `open-design/` | open-design Editorial Monocle 杂志风 | `open-design-editorial-monocle.md` |
 | `sketchnote-editorial/` | X Article 手绘信息图（皱纸 sketchnote） | `design.md` |
@@ -174,7 +174,7 @@ Gate 通过后才能继续。Gate 未通过回退到相应 Mode，不要在同�
 2. 没有匹配的风格模版时，继续使用 `docs/` 中的工作流、知识卡和 8 层模板，不要阻塞流程。
 3. `docs/` 沉淀方法论；`references/` 沉淀可复用的视觉风格系统。不要混用。
 4. 新增风格模版应入库，并在本表、`references/README.md`、`lib/referencePaths.js` 中登记。含隐私或密钥的素材不要放进 `references/`。
-5. 脚本中的路径常量统一由 `lib/referencePaths.js` 维护。
+5. 脚本中的路径常量统一由 `lib/referencePaths.js` 维护。AIPOCH 任务先读 `DESIGN.md` 官方章节与 `assets/`，再读 `Repository Extensions`；素材路径见 `referencePaths.aipoch`。
 
 ## CLI
 
@@ -241,7 +241,7 @@ js-designer-skill/
 ├── index.js
 ├── references/
 │   ├── README.md                  视觉风格模版索引
-│   ├── aipoch/                    AIPOCH 品牌视觉规范与官网 CSS
+│   ├── aipoch/                    AIPOCH 官方 DESIGN.md、assets/ 与历史 CSS
 │   ├── cyber-taoist/              JS Cyber-Taoist 风格系统
 │   ├── open-design/               Editorial Monocle 风格参考
 │   ├── sketchnote-editorial/      X Article 手绘信息图

@@ -25,7 +25,7 @@ Agents should load a specific card on demand rather than reading everything here
 
 | Subdirectory | Entry file | Typical use |
 |---|---|---|
-| `aipoch/` | `AIPOCH-DESIGN-SYSTEM.md` | AIPOCH corporate / board presentation slides |
+| `aipoch/` | `DESIGN.md` | Official AIPOCH mirror from design-system.aipoch.com, plus Repository Extensions and `assets/` |
 | `cyber-taoist/` | `cyber-taoist-real.md` | JS Cyber-Taoist posters and characters |
 | `open-design/` | `open-design-editorial-monocle.md` | Editorial Monocle magazine aesthetic |
 | `sketchnote-editorial/` | `design.md` | X Article hand-drawn sketchnote infographics (crumpled paper, black + orange) |
