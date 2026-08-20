@@ -19,7 +19,7 @@ js-designer-skill/
 │   └── index.js            CLI 包装层
 ├── references/
 │   ├── README.md           视觉风格模版索引
-│   ├── aipoch/             AIPOCH 官方 DESIGN.md、assets/ 与历史 CSS
+│   ├── aipoch/             AIPOCH DESIGN.md、官网 WEBSITE.md、assets 与历史 CSS
 │   ├── cyber-taoist/       JS Cyber-Taoist 风格系统
 │   ├── open-design/        Editorial Monocle 风格参考
 │   ├── sketchnote-editorial/ X Article 手绘信息图
@@ -200,7 +200,7 @@ node cli/index.js review --config-file review-config.json --model gpt-4o-mini
 
 | 子目录 | 入口文件 |
 |--------|----------|
-| `aipoch/` | `DESIGN.md` |
+| `aipoch/` | `DESIGN.md`（官方规则）/ `WEBSITE.md`（官网实现 Profile） |
 | `cyber-taoist/` | `cyber-taoist-real.md` |
 | `open-design/` | `open-design-editorial-monocle.md` |
 | `sketchnote-editorial/` | `design.md` |

@@ -133,6 +133,9 @@ spacing:
 Official source: [design-system.aipoch.com](https://design-system.aipoch.com/).
 Figma source named on that page: AIPOCH UI Component Library → Foundations → Color Scheme.
 Local assets: [assets/README.md](./assets/README.md). Last verified: 2026-08-19.
+The dated implementation profile for the public marketing site is maintained
+separately in [WEBSITE.md](./WEBSITE.md). Website observations never override
+this file's Figma tokens or official written rules.
 
 YAML values that match Figma color tokens are normative. Typography and spacing
 tokens below are DESIGN.md mappings of official written sizes, not extra Figma
@@ -615,7 +618,8 @@ published on design-system.aipoch.com.
 ### Presentation System
 
 Presentation slides inherit official tokens and social layout logic. They do
-not inherit the obsolete May 2026 `#E8E8E8` / `#ECD44C` Neo-Brutalist notes.
+not inherit the public website's observed `#E8E8E8` / `#ECD44C` palette,
+marketing glow, pill controls, or legacy Neo-Brutalist cookie chrome.
 
 Extension-only type sizes. These are not official DESIGN.md YAML tokens:
 
@@ -675,6 +679,30 @@ Logo: use an approved Primary, Inverse, or Stacked asset without recoloring,
 re-spacing, effects, or distortion. Keep original aspect ratio; width auto.
 ```
 
+### Presentation Profile Lock
+
+This repository-only block extends `AIPOCH STYLE LOCK` for board slides. It is
+never loaded by the default core Profile.
+
+```text
+AIPOCH PRESENTATION PROFILE LOCK
+
+Compose inside a centered 16:9 safe frame with a 5% essential-content margin.
+If the image API outputs 1536x1024, leave cropable extra height instead of
+stretching the 16:9 composition.
+Use Inter 52px for slide titles, Inter 36px for section headings, Inter 20px
+for body copy, and Roboto Mono 12px for labels unless the task requires a
+smaller hierarchy. These are repository presentation sizes, not Figma tokens.
+Use Cover, Section divider, Horizontal timeline, Two-column comparison,
+Process diagram, or Two-by-two system map. Choose one Hero, Split, or Frame
+logic and do not mix them.
+Charts use one accent series, explicit units, and a visible source. Omit a
+chart when source data is unavailable.
+Render only final approved visible copy. Quote required Chinese text verbatim,
+review every character, and prefer deterministic rendering when exact wording
+is mandatory.
+```
+
 ### Source Coverage Ledger
 
 | Official section | DESIGN.md location | Evidence |
@@ -689,4 +717,5 @@ re-spacing, effects, or distortion. Keep original aspect ratio; width auto.
 | 7 Social Media | Social Media | written rule + PNG assets |
 | Banner Systems | Social Media → Banner Systems | official example / observation |
 | Copy Tone | Copy Tone | written rule |
+| Public marketing website | [WEBSITE.md](./WEBSITE.md) | dated live implementation observation |
 | Presentation / Style Lock | Repository Extensions | repository only |

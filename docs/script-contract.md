@@ -282,8 +282,21 @@ These scripts are not exposed as Skill tools. They wrap the same gpt-image-2 gen
 
 | Script | Purpose | Reference source |
 |---|---|---|
-| `scripts/gen-single.js` | Generate one AIPOCH board slide by index | `lib/boardSlides.js` reads Official + Repository Extensions from `references/aipoch/DESIGN.md` and requires `references/aipoch/assets/` |
+| `scripts/gen-single.js` | Generate one AIPOCH board slide by index | `lib/boardSlides.js` explicitly composes the `board-slide` preset from core + presentation locks and requires the design-system assets |
 | `scripts/generate-board-slides.js` | Generate all AIPOCH board slides in sequence | same as above |
+
+`lib/aipochProfiles.js` owns the AIPOCH prompt boundary:
+
+- `official-design` is the default and loads only the canonical core lock from
+  `references/aipoch/DESIGN.md`;
+- `website-replica` is opt-in and loads the dated
+  `references/aipoch/WEBSITE.md` implementation lock;
+- `board-slide` combines core with the repository presentation lock.
+
+Website-only `#E8E8E8`, `#ECD44C`, pill, glow, and Product Tour effects must
+not pass the core/board prompt guard. Both board scripts retain the
+`1536x1024` API request and compose essential content inside a centered 16:9
+safe frame; neither script performs a post-generation crop.
 
 ```bash
 # Generate slide index 0 (Slide 4 - 历史复盘)

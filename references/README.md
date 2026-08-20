@@ -7,10 +7,11 @@
 ```text
 references/
 ├── README.md
-├── aipoch/                         AIPOCH 官方品牌镜像 + 仓库演示扩展
-│   ├── DESIGN.md                   官方规则（DESIGN.md alpha）+ Repository Extensions
+├── aipoch/                         AIPOCH 官方品牌镜像 + 官网 Profile + 仓库演示扩展
+│   ├── DESIGN.md                   Figma / design-system 官方规则 + Repository Extensions
+│   ├── WEBSITE.md                  aipoch.com dated implementation Profile
 │   ├── AIPOCH-DESIGN-SYSTEM.md     旧路径兼容说明
-│   ├── assets/                     Logo、品牌元素、12 背景、42 图标
+│   ├── assets/                     62 个 design-system 资产 + website 审计证据
 │   ├── aipoch-css1.css             2026-05 官网 CSS 历史快照
 │   └── aipoch-css2.css             2026-05 字体加载历史快照
 ├── cyber-taoist/                   JS Cyber-Taoist 视觉风格
@@ -33,7 +34,9 @@ references/
 
 | 任务场景 | 优先读取 |
 |----------|----------|
-| AIPOCH 品牌 / 社媒 / 董事会 PPT | `aipoch/DESIGN.md`（官方规则 + Repository Extensions）+ `aipoch/assets/` |
+| AIPOCH 品牌基础 / 社媒 | `aipoch/DESIGN.md` + `official-design` Profile |
+| AIPOCH 官网 / Landing Page / Web Hero 复刻 | `aipoch/WEBSITE.md` + 显式 `website-replica` Profile |
+| AIPOCH 董事会 PPT | `aipoch/DESIGN.md` + `board-slide` Profile |
 | JS 赛博道家海报 / 人物 | `cyber-taoist/cyber-taoist-real.md` |
 | Editorial Monocle 杂志风 | `open-design/open-design-editorial-monocle.md` |
 | X Article 手绘信息图 / 教程风 sketchnote | `sketchnote-editorial/design.md` |
