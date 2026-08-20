@@ -14,6 +14,12 @@ references/
 │   ├── assets/                     62 个 design-system 资产 + website 审计证据
 │   ├── aipoch-css1.css             2026-05 官网 CSS 历史快照
 │   └── aipoch-css2.css             2026-05 字体加载历史快照
+├── aipoch-investor-deck/           AIPOCH Investor Deck 独立仓库扩展
+│   ├── design.md                   Light/Black、中文字体、母版与 Style Lock
+│   ├── illustration-style.md       科学编辑插画语言
+│   ├── slide-types.md              页型与信息密度
+│   ├── content/                    四幕 22 页骨架与来源规则
+│   └── assets/                     4 张降采样、reference-only 风格证据
 ├── cyber-taoist/                   JS Cyber-Taoist 视觉风格
 │   ├── cyber-taoist-real.md        完整风格系统
 │   └── cyber-taoist-character-prompt.md
@@ -37,6 +43,7 @@ references/
 | AIPOCH 品牌基础 / 社媒 | `aipoch/DESIGN.md` + `official-design` Profile |
 | AIPOCH 官网 / Landing Page / Web Hero 复刻 | `aipoch/WEBSITE.md` + 显式 `website-replica` Profile |
 | AIPOCH 董事会 PPT | `aipoch/DESIGN.md` + `board-slide` Profile |
+| AIPOCH 融资 / 投资人叙事 | `aipoch-investor-deck/design.md` + 显式 `investor-deck` Profile |
 | JS 赛博道家海报 / 人物 | `cyber-taoist/cyber-taoist-real.md` |
 | Editorial Monocle 杂志风 | `open-design/open-design-editorial-monocle.md` |
 | X Article 手绘信息图 / 教程风 sketchnote | `sketchnote-editorial/design.md` |
@@ -50,4 +57,4 @@ references/
 - `docs/`：可复用方法论（工作流、知识卡、8 层 prompt、7 维评审）
 - `references/`：可复用的视觉风格模版（色板、构图、prompt 骨架、样例图）
 
-新增风格模版应作为新的子目录入库，并在本文件、`SKILL.md`、`lib/referencePaths.js` 中登记。含隐私、密钥或不宜公开的素材不要放进本目录。
+新增风格模版应作为新的子目录入库，并在本文件、`SKILL.md`、`lib/referencePaths.js` 中登记。含隐私、密钥或不宜公开的素材不要放进本目录。`aipoch-investor-deck/` 不得包含 PPT/PPTX/POTX；r5/r6 只记录外部文件名与哈希。

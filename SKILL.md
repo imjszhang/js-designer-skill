@@ -162,6 +162,7 @@ Gate 通过后才能继续。Gate 未通过回退到相应 Mode，不要在同�
 | 子目录 | 用途 | 入口文件 |
 |--------|------|----------|
 | `aipoch/` | AIPOCH 官方品牌、官网实现 Profile 与仓库演示扩展；素材见 `assets/` | `DESIGN.md` / `WEBSITE.md` |
+| `aipoch-investor-deck/` | AIPOCH 融资/投资人叙事、Light/Black 双画布与科学编辑插画；继承 canonical core | `design.md` |
 | `cyber-taoist/` | JS Cyber-Taoist 海报与人物风格 | `cyber-taoist-real.md` |
 | `open-design/` | open-design Editorial Monocle 杂志风 | `open-design-editorial-monocle.md` |
 | `sketchnote-editorial/` | X Article 手绘信息图（皱纸 sketchnote） | `design.md` |
@@ -174,7 +175,7 @@ Gate 通过后才能继续。Gate 未通过回退到相应 Mode，不要在同�
 2. 没有匹配的风格模版时，继续使用 `docs/` 中的工作流、知识卡和 8 层模板，不要阻塞流程。
 3. `docs/` 沉淀方法论；`references/` 沉淀可复用的视觉风格系统。不要混用。
 4. 新增风格模版应入库，并在本表、`references/README.md`、`lib/referencePaths.js` 中登记。含隐私或密钥的素材不要放进 `references/`。
-5. 脚本中的路径常量统一由 `lib/referencePaths.js` 维护。AIPOCH 品牌基础与社媒默认读取 `DESIGN.md` / `official-design`；官网、Landing Page、Web Hero 复刻必须显式读取 `WEBSITE.md` / `website-replica`；董事会 PPT 使用 `board-slide`。website Profile 的旧色板、圆角、投影和 glow 不得进入默认 core 或 presentation prompt；素材路径见 `referencePaths.aipoch`。
+5. 脚本中的路径常量统一由 `lib/referencePaths.js` 维护。AIPOCH 品牌基础与社媒默认读取 `DESIGN.md` / `official-design`；官网、Landing Page、Web Hero 复刻必须显式读取 `WEBSITE.md` / `website-replica`；董事会 PPT 使用 `board-slide`；融资/投资人叙事显式使用 `aipoch-investor-deck/design.md` / `investor-deck`。website Profile 的旧色板、圆角、投影和 glow 不得进入 core、presentation 或 investor prompt。Investor 参考只用于风格观察，外部 PPTX 不入库；路径见 `referencePaths.aipochInvestorDeck`。
 
 ## CLI
 
@@ -242,6 +243,7 @@ js-designer-skill/
 ├── references/
 │   ├── README.md                  视觉风格模版索引
 │   ├── aipoch/                    AIPOCH DESIGN.md、官网 WEBSITE.md、assets 与历史 CSS
+│   ├── aipoch-investor-deck/      AIPOCH Investor Deck 独立模板包
 │   ├── cyber-taoist/              JS Cyber-Taoist 风格系统
 │   ├── open-design/               Editorial Monocle 风格参考
 │   ├── sketchnote-editorial/      X Article 手绘信息图

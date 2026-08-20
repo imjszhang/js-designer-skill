@@ -20,6 +20,7 @@ js-designer-skill/
 ├── references/
 │   ├── README.md           视觉风格模版索引
 │   ├── aipoch/             AIPOCH DESIGN.md、官网 WEBSITE.md、assets 与历史 CSS
+│   ├── aipoch-investor-deck/ AIPOCH 投资人叙事、双画布与科学编辑插画模板包
 │   ├── cyber-taoist/       JS Cyber-Taoist 风格系统
 │   ├── open-design/        Editorial Monocle 风格参考
 │   ├── sketchnote-editorial/ X Article 手绘信息图
@@ -38,6 +39,7 @@ js-designer-skill/
 │   ├── gpt-image-extract.js             CLI 入口：风格抽取
 │   ├── gen-single.js                    单张 AIPOCH 董事会幻灯片生成
 │   ├── generate-board-slides.js         批量 AIPOCH 董事会幻灯片生成
+│   ├── verify-aipoch-investor-deck.js   校验 Investor Deck Profile 与参考资产
 │   ├── gptImageGenerator.js             底层：/v1/images/generations
 │   ├── gptImageEditor.js                底层：/v1/images/edits
 │   ├── gptImageReviewer.js              底层：多模态 /v1/chat/completions

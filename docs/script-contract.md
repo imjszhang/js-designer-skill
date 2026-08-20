@@ -284,6 +284,7 @@ These scripts are not exposed as Skill tools. They wrap the same gpt-image-2 gen
 |---|---|---|
 | `scripts/gen-single.js` | Generate one AIPOCH board slide by index | `lib/boardSlides.js` explicitly composes the `board-slide` preset from core + presentation locks and requires the design-system assets |
 | `scripts/generate-board-slides.js` | Generate all AIPOCH board slides in sequence | same as above |
+| `scripts/verify-aipoch-investor-deck.js` | Verify the opt-in Investor Deck pack, reference manifest, profile isolation, and no-PPT boundary | `references/aipoch-investor-deck/` plus canonical AIPOCH core |
 
 `lib/aipochProfiles.js` owns the AIPOCH prompt boundary:
 
@@ -291,10 +292,23 @@ These scripts are not exposed as Skill tools. They wrap the same gpt-image-2 gen
   `references/aipoch/DESIGN.md`;
 - `website-replica` is opt-in and loads the dated
   `references/aipoch/WEBSITE.md` implementation lock;
-- `board-slide` combines core with the repository presentation lock.
+- `board-slide` combines core with the repository presentation lock;
+- `investor-deck` is opt-in and combines canonical core with
+  `references/aipoch-investor-deck/design.md`'s investor lock.
 
 Website-only `#E8E8E8`, `#ECD44C`, pill, glow, and Product Tour effects must
-not pass the core/board prompt guard. Both board scripts retain the
+not pass the core, board, or investor prompt guard. The Investor lock adds
+16:9 presentation geometry, Chinese typography, the Light/Black canvas
+system, the three-level brand signature, lower-left sources, and a constrained
+scientific-editorial illustration exception. Black pages use canonical
+`#111111`; they do not inherit website visuals.
+
+Investor prompt templates are guidance files only. They do not call an image
+API or generate a PPTX. External r5/r6 PPTX files remain outside the repository;
+only filenames, hashes, audit observations, and four reduced non-sensitive
+reference illustrations are versioned.
+
+Both board scripts retain the
 `1536x1024` API request and compose essential content inside a centered 16:9
 safe frame; neither script performs a post-generation crop.
 
@@ -304,6 +318,9 @@ node scripts/gen-single.js 0
 
 # Generate all 5 board slides
 node scripts/generate-board-slides.js
+
+# Verify the Investor Deck pack; does not generate images or slides
+npm run verify:aipoch-investor
 ```
 
 Path constants for all `references/` subdirectories: `lib/referencePaths.js`.

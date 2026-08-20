@@ -26,13 +26,14 @@ Agents should load a specific card on demand rather than reading everything here
 | Subdirectory | Entry file | Typical use |
 |---|---|---|
 | `aipoch/` | `DESIGN.md` / `WEBSITE.md` | Canonical design-system/Figma rules via `official-design`; dated aipoch.com reproduction only via explicit `website-replica`; board decks via `board-slide` |
+| `aipoch-investor-deck/` | `design.md` | Financing and investor narratives via opt-in `investor-deck` (`core + investor`), including Light/Black canvases, Chinese deck type, sources, and scientific-editorial illustration |
 | `cyber-taoist/` | `cyber-taoist-real.md` | JS Cyber-Taoist posters and characters |
 | `open-design/` | `open-design-editorial-monocle.md` | Editorial Monocle magazine aesthetic |
 | `sketchnote-editorial/` | `design.md` | X Article hand-drawn sketchnote infographics (crumpled paper, black + orange) |
 | `youtube-thumbnail/` | `youtube-thumbnail-system.md` | YouTube / video thumbnails with real-person edit |
 | `napkin-one-pager/` | `napkin-one-pager-system.md` | One-page napkin-sketch infographics (3×3 cards + build order) |
 
-These are versioned style systems. Reusable methodology stays in `docs/`. Do not put secrets or private assets here.
+These are versioned style systems. Reusable methodology stays in `docs/`. Do not put secrets or private assets here. The Investor Deck pack contains only reduced, reference-only illustration evidence; external r5/r6 PPTX files remain outside the repository.
 
 ## Core Aphorisms (the five that never change)
 

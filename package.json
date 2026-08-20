@@ -7,7 +7,8 @@
   "scripts": {
     "start": "node index.js",
     "generate": "node index.js generate",
-    "verify:aipoch": "node scripts/verify-aipoch-profiles.js"
+    "verify:aipoch": "node scripts/verify-aipoch-profiles.js",
+    "verify:aipoch-investor": "node scripts/verify-aipoch-investor-deck.js"
   },
   "engines": {
     "node": ">=16.0.0"
